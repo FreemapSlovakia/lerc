@@ -102,9 +102,9 @@ dependencies = [
 
 [[package]]
 name = "lerc-sys"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc333521ae89ec0f9a6e13cf83128f309dd3f7502dd4c9f1a000801a0510e993"
+checksum = "5e60b40cd1fedb8ef90561a909e7c10e648540c028c3ffc5e9059beb1b7aba6a"
 dependencies = [
  "bindgen",
  "cc",
