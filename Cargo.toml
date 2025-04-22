@@ -1,0 +1,20 @@
+[package]
+authors = ["Martin Ždila <martin.zdila@freemap.sk>"]
+categories = ["compression", "external-ffi-bindings", "science"]
+description = "Safe and idiomatic Rust wrapper for Esri's LERC compression library"
+documentation = "https://docs.rs/lerc"
+edition = "2024"
+keywords = ["lerc", "compression", "raster", "geospatial", "ffi"]
+license = "Apache-2.0"
+name = "lerc"
+readme = "README.md"
+repository = "https://github.com/FreemapSlovakia/lerc"
+rust-version = "1.60"
+version = "0.1.0"
+
+[dependencies]
+lerc-sys = "0.1.2"
+
+[features]
+default = ["vendored"]
+vendored = []
