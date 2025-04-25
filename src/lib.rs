@@ -43,6 +43,8 @@ mod info;
 
 pub use datatype::LercDataType;
 pub use decode::decode;
+pub use decode::decode_auto;
+pub use decode::decode_with_info;
 pub use encode::encode;
 pub use error::LercError;
 pub use info::{BlobInfo, get_blob_info};

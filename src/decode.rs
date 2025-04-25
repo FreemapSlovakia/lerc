@@ -1,6 +1,6 @@
 use lerc_sys::ffi;
 
-use crate::{LercError, datatype::LercDataType};
+use crate::{BlobInfo, LercError, datatype::LercDataType, get_blob_info};
 
 /// Decodes a LERC-compressed byte buffer into typed raster values.
 ///
@@ -62,4 +62,45 @@ pub fn decode<T: LercDataType>(
     }
 
     Ok((data, valid_mask))
+}
+
+/// Decodes a LERC blob using the provided [`BlobInfo`] metadata.
+///
+/// This is a convenience wrapper over [`decode`] that extracts all
+/// necessary dimensions and layout parameters from a `BlobInfo` instance.
+///
+/// # Parameters
+/// - `blob`: The LERC-compressed input byte slice.
+/// - `info`: Metadata describing the compressed layout.
+///
+/// # Returns
+/// A tuple of decoded data and optional validity mask.
+pub fn decode_with_info<T: LercDataType>(
+    blob: &[u8],
+    info: &BlobInfo,
+) -> Result<(Vec<T>, Option<Vec<u8>>), LercError> {
+    decode::<T>(
+        blob,
+        info.width as usize,
+        info.height as usize,
+        info.depth as usize,
+        info.bands as usize,
+        info.masks as usize,
+    )
+}
+
+/// Decodes a LERC blob by first inspecting its metadata with [`get_blob_info`].
+///
+/// This is the simplest way to decode a LERC blob when you don’t know its
+/// layout ahead of time. Internally calls [`get_blob_info`] and then [`decode_with_info`].
+///
+/// # Parameters
+/// - `blob`: The LERC-compressed input byte slice.
+///
+/// # Returns
+/// A tuple of decoded data and optional validity mask.
+pub fn decode_auto<T: LercDataType>(blob: &[u8]) -> Result<(Vec<T>, Option<Vec<u8>>), LercError> {
+    let info = get_blob_info(blob)?;
+
+    decode_with_info::<T>(blob, &info)
 }
