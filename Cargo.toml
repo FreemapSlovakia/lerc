@@ -10,10 +10,10 @@ name = "lerc"
 readme = "README.md"
 repository = "https://github.com/FreemapSlovakia/lerc"
 rust-version = "1.85.0"
-version = "0.2.0"
+version = "0.2.1"
 
 [dependencies]
-lerc-sys = "0.1.2"
+lerc-sys = "0.1"
 
 [features]
 default = ["vendored"]
